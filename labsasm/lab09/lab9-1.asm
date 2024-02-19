@@ -1,7 +1,7 @@
-%include 'in_out.asm
+%include 'in_out.asm'
 SECTION .data
 msg: DB 'Введите x: ',0
-result: DB '2x+7=',0
+result: DB 'Результат: ',0
 SECTION .bss
 x: RESB 80
 res: RESB 80
@@ -28,8 +28,15 @@ call quit
 ; Подпрограмма вычисления
 ; выражения "2x+7"
 _calcul:
+call _subcalcul
 mov ebx,2
 mul ebx
 add eax,7
 mov [res],eax
 ret ; выход из подпрограммы
+
+_subcalcul:
+mov ebx,3
+mul ebx
+sub eax,1
+ret
