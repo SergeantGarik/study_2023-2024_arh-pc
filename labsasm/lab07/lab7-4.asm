@@ -3,14 +3,14 @@ section .data
 msg1 db 'Введите a: ',0
 msg2 db 'Введите х: ',0
 msg3 db 'Результат выполнения функции: ',0
-
+;объявляем переменные
 section .bss
 x resb 10
 a resb 10
 res resb 10
 section .text
 global _start
-
+;точка входа, ввод а
 _start:
 mov eax,msg1
 call sprint
@@ -20,7 +20,7 @@ call sread
 mov eax,a
 call atoi 
 mov [a],eax 
-
+;ввод х
 mov eax,msg2
 call sprint
 mov ecx,x
@@ -29,7 +29,7 @@ call sread
 mov eax,x
 call atoi 
 mov [x],eax 
-
+;сравнение х и 4
 cmp byte[x],4
 jl _label1
 jge _label2
