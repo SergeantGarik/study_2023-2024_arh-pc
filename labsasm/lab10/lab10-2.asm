@@ -1,29 +1,29 @@
 %include 'in_out.asm'
 
 section .data
-    nameRequest: db "Как вас зовут? - ", 0
-    filename: db "name.txt", 0
-    iam: db "Меня зовут "
+    nameRequest: db "Как вас зовут? - ", 0 ;запрос имени
+    filename: db "name.txt", 0 ;название файла
+    iam: db "Меня зовут " ;первая строчка в файле
     iamLength: equ $-iam
 
 section .bss
-    name: resb 255
+    name: resb 255 ;объявляем переменную
 
 section .text
     global _start
 
 _start:
-    mov eax, nameRequest
+    mov eax, nameRequest ;вызываем запрос имени
     call sprint
 
-    mov ecx, name
+    mov ecx, name 
     mov edx,255
-    call sread
+    call sread ;записываем имя, которое пользователь указал в консоли
     
     mov ecx, 0777o 
     mov ebx, filename
     mov eax, 8 
-    int 80h
+    int 80h ;создаем файл
 
     call _openfile
 
